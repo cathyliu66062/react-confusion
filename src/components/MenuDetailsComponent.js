@@ -9,34 +9,42 @@ class MenuDetails extends Component{
         }
     }
 
-    render(){
-        return(
-          <div className="col-12 col-md-5 m-1">
+RenderDetails(dish){
+      return(
         <Card>
-            <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.Name}></CardImg>
-            <CardBody>
-              <CardTitle>
-                {this.props.dish.name}
-              </CardTitle>
-              <CardText>
-                {this.props.dish.description}
-              </CardText>
+        <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.Name}></CardImg>
+        <CardBody>
+          <CardTitle>
+            {this.props.dish.name}
+          </CardTitle>
+          <CardText>
+            {this.props.dish.description}
+          </CardText> 
+      </CardBody>
+      </Card>
+      );
+    }
 
-            {this.props.dish.comments.map((test)=>
-            {
-              return(
+RenderComments(dish){
+  const comments = dish.comments.map((comment)=>
+      {
+        return(
+          <CardText>{comment.comment}    --
+          {comment.author}  {comment.date}</CardText>
+        );
+      });  
+}
 
-              <div className="col-12 col-md-5 m-1">
-                <CardText>{test.comment}    --
-                {test.author}  {test.date}</CardText>
-                </div>
-              );
-
-            })
-          }
-              </CardBody>
-              </Card>
-              </div>
+render(){
+        return(
+          <div className="col-12 col-md-5 m-2">
+            <div className="row">
+            {this.RenderDetails(this.props.dish)};</div>
+            <div className="row">
+            {this.RenderComments(this.props.dish)};
+            </div>
+          
+          </div>
 
         );   
     }
